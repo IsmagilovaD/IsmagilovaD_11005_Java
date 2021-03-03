@@ -51,10 +51,10 @@ public class LinkedList<T> implements Iterable<T> {
     }
     }
 
-    public int size() throws Exception {
+    public int size(){
         int i = 0;
         if (root == null) {
-           throw new Exception("No elemets");
+           return 0;
         } else {
             Node<T> temp = root;
             while (temp.next != null) {
