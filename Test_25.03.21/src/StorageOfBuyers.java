@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 public class StorageOfBuyers {
 
-    ArrayList<Buyer> buyers = new ArrayList<>();
+    static ArrayList<Buyer> buyers = new ArrayList<>();
 
     Buyer getBuyer(String name) {
             for (Buyer buyer : buyers) {
@@ -34,14 +34,16 @@ public class StorageOfBuyers {
         Comparator<Buyer> comparator1 = nameComparator.thenComparing(cityCountComparator).thenComparing(ordersCountComparator);
         TreeSet<Buyer> nameSort = new TreeSet<>(comparator1);
         nameSort.addAll(buyers);
-        try (FileWriter writer = new FileWriter("sortedByName.txt", true)) {
-            for (Buyer buyer : nameSort){
-                writer.write(buyer.toString());
-                writer.write("\n");
-            }
+        try {
+            FileOutputStream fos = new FileOutputStream("sortedByNames.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            for (Buyer buyer : nameSort)
+                oos.writeObject(buyer.toString());
+
+            fos.close();
         }
         catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -52,14 +54,16 @@ public class StorageOfBuyers {
         Comparator<Buyer> comparator2 = ordersCountComparator.thenComparing(cityCountComparator).thenComparing(nameComparator);
         TreeSet<Buyer> ordersCountSort = new TreeSet<>(comparator2);
         ordersCountSort.addAll(buyers);
-        try (FileWriter writer = new FileWriter("sortedByOrders.txt", true)) {
-            for (Buyer buyer : ordersCountSort){
-                writer.write(buyer.toString());
-                writer.write("\n");
-            }
+        try {
+            FileOutputStream fos = new FileOutputStream("sortedByOrders.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            for (Buyer buyer : ordersCountSort)
+                oos.writeObject(buyer.toString());
+
+            fos.close();
         }
         catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
     }
