@@ -7,6 +7,9 @@ public class Order {
         this.count = count;
     }
 
+    public String toString(){
+        return name + " = " + count;
+    }
     public String getName() {
         return name;
     }

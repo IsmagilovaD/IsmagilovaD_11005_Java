@@ -1,12 +1,40 @@
 import java.util.ArrayList;
 
 public class Buyer {
-    private String name;
-    private ArrayList<City> cities = new ArrayList<>();
+     String name;
+     ArrayList<City> cities = new ArrayList<>();
 
-    public Buyer(String name, City cities) {
+    public Buyer(String name) {
         this.name= name;
-        this.cities.add(cities);
+    }
+
+    void addOrder(String city, String name, int count) {
+        for (City c : cities) {
+            if (c.getName().equals(city)) {
+                c.addOrder(name, count);
+                return;
+            }
+        }
+        cities.add(new City(city));
+        addOrder(city, name, count);
+    }
+
+    public int getOrdersCount(){
+            int count = 0;
+            for(City c:cities) {
+                count += c.getOrdersCount();
+            }
+            return count;
+    }
+
+    void print(){
+        for (int i = 0; i < cities.size(); i++){
+            cities.get(i).print();
+        }
+    }
+
+    public String toString(){
+        return name + cities;
     }
 
     public String getName() {
