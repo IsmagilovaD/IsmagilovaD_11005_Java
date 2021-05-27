@@ -2,12 +2,11 @@ public class Task1 {
     public static volatile long k = 1;
 
     public static void main(String[] args) throws InterruptedException {
-        byte number = 7;
+        byte number = 8;
 
         Thread t1 = new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + " работает");
-            fourthOfFactorial(number, 1);
-            System.out.println(Thread.currentThread().getName() + " посчитал " + k);
+            System.out.println(Thread.currentThread().getName() + " посчитал " + fourthOfFactorial(number, 1));
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) {
@@ -16,8 +15,7 @@ public class Task1 {
         });
         Thread t2 = new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + " работает");
-            fourthOfFactorial(number, 2);
-            System.out.println(Thread.currentThread().getName() + " посчитал " + k);
+            System.out.println(Thread.currentThread().getName() + " посчитал " + fourthOfFactorial(number, 2));
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) {
@@ -26,8 +24,7 @@ public class Task1 {
         });
         Thread t3 = new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + " работает");
-            fourthOfFactorial(number, 3);
-            System.out.println(Thread.currentThread().getName() + " посчитал " + k);
+            System.out.println(Thread.currentThread().getName() + " посчитал " + fourthOfFactorial(number, 3));
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) {
@@ -36,8 +33,7 @@ public class Task1 {
         });
         Thread t4 = new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + " работает");
-            fourthOfFactorial(number, 4);
-            System.out.println(Thread.currentThread().getName() + " посчитал " + k);
+            System.out.println(Thread.currentThread().getName() + " посчитал " + fourthOfFactorial(number, 4));
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) {
@@ -58,11 +54,12 @@ public class Task1 {
         System.out.println("Answer " + k);
     }
 
-    public static void fourthOfFactorial(int n, int fourth) {
+    public static long fourthOfFactorial(int n, int fourth) {
         if (fourth == 1) for (int i = 1; i < n / 4 + 1; i++) k = k * i;
         if (fourth == 2) for (int i = n / 4 + 1; i < n / 2 + 1; i++) k = k * i;
         if (fourth == 3) for (int i = n / 2 + 1; i < 3 * n / 4 + 1; i++) k = k * i;
         if (fourth == 4) for (int i = 3 * n / 4 + 1; i < n + 1; i++) k = k * i;
+        return k;
     }
 }
 
