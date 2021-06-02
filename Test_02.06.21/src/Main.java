@@ -19,12 +19,15 @@ public class Main {
                     return;
                 case 1:
                     Thread t1 = new Thread(Main::task1);
+                    t1.start();
                     break;
                 case 2:
                     Thread t2 = new Thread(Main::task2);
+                    t2.start();
                     break;
                 case 3:
                     Thread t3 = new Thread(Main::task3);
+                    t3.start();
                     break;
                 default:
                     break;
